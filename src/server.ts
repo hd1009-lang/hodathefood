@@ -1,3 +1,4 @@
+import { handleErrorMessage } from './utils/HandleError';
 import express from 'express';
 import connectDB from './config/db';
 import dotenv from 'dotenv';
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', routes);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }));
+app.use(handleErrorMessage);
 app.listen(PORT, () => {
-    console.log(`Connecting`);
+    console.log(`Let's the game begin 🚀`);
 });
