@@ -1287,6 +1287,7 @@
 .swagger-ui .topbar {
     padding: 8px 30px;
     background-color: #89bf04;
+    display: none;
 }
 
 .swagger-ui .topbar .topbar-wrapper {
