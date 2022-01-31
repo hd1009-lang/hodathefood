@@ -1,5 +1,5 @@
-import ValidateLogin from './LoginValidate';
+import UserValidation from './UserValidate';
 const index = {
-    ValidateLogin,
+    UserValidation,
 };
 export default index;

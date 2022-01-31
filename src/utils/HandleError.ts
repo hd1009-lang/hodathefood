@@ -19,12 +19,6 @@ export class ErrorApi {
         this.mess = mess;
         this.code = code;
     }
-    static OkRequest(mess: string) {
-        return new ErrorApi(HttpStatusCode.OK, mess);
-    }
-    static CreatedRequest(mess: string) {
-        return new ErrorApi(HttpStatusCode.CREATED, mess);
-    }
     static BadRequest(mess: string) {
         console.log(mess);
         return new ErrorApi(HttpStatusCode.BAD_REQUEST, mess);

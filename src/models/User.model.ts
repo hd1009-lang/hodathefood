@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
-
+export interface IUserModel extends mongoose.Document {
+    username: string;
+    name: string;
+    bmiId: string;
+    password: string;
+    active: boolean;
+    role: string;
+    post: [];
+}
 const UserSchema = new mongoose.Schema(
     {
         username: {
@@ -7,25 +15,18 @@ const UserSchema = new mongoose.Schema(
             trim: true,
             required: true,
         },
+        name: {
+            type: String,
+            required: true,
+        },
         password: {
             type: String,
             trim: true,
             required: true,
         },
-        height: {
-            type: Number,
-        },
-        weight: {
-            type: Number,
-        },
-        gender: {
-            type: String,
-        },
-        yearOfBirth: {
-            type: Number,
-        },
-        activity: {
-            type: Number,
+        bmiId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'bmis',
         },
         post: [
             {
@@ -33,10 +34,18 @@ const UserSchema = new mongoose.Schema(
                 ref: 'posts',
             },
         ],
+        active: {
+            type: Boolean,
+            default: true,
+        },
+        role: {
+            type: String,
+            default: 'user',
+        },
     },
     {
         timestamps: true,
     }
 );
-const Users = mongoose.model('users', UserSchema);
+const Users = mongoose.model<IUserModel>('users', UserSchema);
 export default Users;

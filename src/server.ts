@@ -19,7 +19,6 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static('public'));
 app.get('/', (req, res) => {
     return res.redirect('/docs');
 });
@@ -29,12 +28,7 @@ var cssOptions = {
     customfavIcon: '/clipboard.ico',
 };
 app.use('/api', routes);
-app.use(
-    '/docs',
-    // express.static('node_modules/swagger-ui-dist/', { index: false }),
-    swaggerUI.serve,
-    swaggerUI.setup(swaggerDocument, cssOptions)
-);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, cssOptions));
 app.use(handleErrorMessage);
 app.listen(PORT, () => {
     console.log(`Let's the game begin 🚀`);
