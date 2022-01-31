@@ -9,6 +9,7 @@ import routes from './routes';
 
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument from './docs/Swagger';
+import index from './validates';
 
 dotenv.config();
 
@@ -24,7 +25,12 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', routes);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, { explorer: true }));
+app.use(
+    '/docs',
+    express.static('node_modules/swagger-ui-dist/', { index: false }),
+    swaggerUI.serve,
+    swaggerUI.setup(swaggerDocument, { explorer: true })
+);
 app.use(handleErrorMessage);
 app.listen(PORT, () => {
     console.log(`Let's the game begin 🚀`);
