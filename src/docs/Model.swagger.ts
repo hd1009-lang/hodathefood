@@ -17,6 +17,43 @@ const ApiResponse = {
         },
     },
 };
+const Register = {
+    type: 'object',
+    properties: {
+        username: {
+            type: 'string',
+        },
+        password: {
+            type: 'string',
+        },
+        name: {
+            type: 'string',
+        },
+    },
+};
+const BMI = {
+    type: 'object',
+    properties: {
+        idUser: {
+            type: 'string',
+        },
+        height: {
+            type: 'number',
+        },
+        weight: {
+            type: 'number',
+        },
+        gender: {
+            type: 'number',
+        },
+        yearOfBirth: {
+            type: 'number',
+        },
+        activity: {
+            type: 'number',
+        },
+    },
+};
 const Category = {
     type: 'object',
     properties: {
@@ -130,10 +167,12 @@ const Pet = {
 
 const DefaultModel = {
     Auth,
-    Category,
-    User,
-    Tag,
-    Pet,
+    Register,
+    // Category,
+    // User,
+    // Tag,
+    // Pet,
+    BMI,
     ApiResponse,
 };
 export default DefaultModel;

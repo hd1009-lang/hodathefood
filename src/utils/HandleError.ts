@@ -11,10 +11,9 @@ type ErrorDefault = {
     code: number;
 };
 
-
 export class ErrorApi {
-    protected mess: string;
-    protected code: number;
+    public mess: string;
+    public code: number;
     constructor(code: number, mess: string) {
         this.mess = mess;
         this.code = code;
@@ -25,8 +24,7 @@ export class ErrorApi {
     }
 }
 
-
-export const handleErrorMessage = (err: ErrorDefault, req: Request, res: Response, next: NextFunction) => {
+export const handleErrorMessage = (err: ErrorApi, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof ErrorApi) {
         return res.status(err.code).json({ message: err.mess });
     }

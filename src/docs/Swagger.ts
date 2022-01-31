@@ -1,8 +1,3 @@
-// const YAML = require('yamljs');
-// const path = require('path')
-// const swagger_path =  path.resolve(__dirname,'./swagger.yaml');
-// const swaggerDocument = YAML.load(swagger_path);
-// export default swaggerDocument
 import DefaultModel from './Model.swagger';
 import UserSwagger from './Users.swagger';
 const Swagger = {

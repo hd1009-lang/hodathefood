@@ -27,7 +27,7 @@ const UserController = {
         try {
             Validate.UserValidation.ValidateBMI(req.body);
             const data = await UserServices.UpdateBMIs(req.body);
-            return res.status(HttpStatusCode.CREATED).json({ message: 'Ok', data });
+            return res.status(HttpStatusCode.CREATED).json({ message: 'Cập nhật BMI thành công' });
         } catch (error) {
             return next(ErrorApi.BadRequest((error as Error).message));
         }
