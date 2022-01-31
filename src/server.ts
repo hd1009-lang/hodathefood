@@ -12,7 +12,7 @@ import swaggerDocument from './docs/Swagger';
 
 dotenv.config();
 
-// connectDB();
+connectDB();
 
 const app = express();
 const PORT = 8000;
