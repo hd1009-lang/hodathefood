@@ -4,7 +4,6 @@ import connectDB from './config/db';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
-import path from 'path';
 import routes from './routes';
 
 import swaggerUI from 'swagger-ui-express';
@@ -19,13 +18,15 @@ const PORT = 8000;
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.get('/', (req, res) => {
     return res.redirect('/docs');
 });
 var cssOptions = {
     customCssUrl: '/custom.css',
     customSiteTitle: 'Poopcode APIs',
+    customfavIcon: '/clipboard.ico',
 };
 app.use('/api', routes);
 app.use(

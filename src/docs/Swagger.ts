@@ -32,6 +32,10 @@ const Swagger = {
             in: 'header',
         },
     },
+    externalDocs: {
+        description: 'Used with Swagger. Click to find out more about Swagger ',
+        url: 'http://swagger.io',
+    },
 };
 
 export default Swagger;
