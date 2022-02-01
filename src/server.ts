@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import routes from './routes';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
-import swaggerDocument from './docs/Swagger';
+import swaggerDocument from '../docs/Swagger';
 
 dotenv.config();
 
