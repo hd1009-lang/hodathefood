@@ -18,7 +18,7 @@ const PORT = 8000;
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.basename(path.join(__dirname, 'public'))));
 app.get('/', (req, res) => {
     return res.redirect('/docs');
 });
