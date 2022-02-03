@@ -65,17 +65,17 @@ const UserSwagger = {
             },
         },
     },
-    '/api/users/update-bmi': {
+    '/api/users/create-bmi': {
         post: {
-            tags: ['Auth'],
-            summary: 'Update BMI',
+            tags: ['User'],
+            summary: 'Create BMI',
             description: '',
             produces: ['application/json'],
             parameters: [
                 {
                     in: 'body',
                     name: 'body',
-                    description: 'Update BMI',
+                    description: 'Create BMI',
                     required: true,
                     schema: {
                         $ref: '#/definitions/BMI',

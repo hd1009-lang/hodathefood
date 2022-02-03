@@ -18,7 +18,7 @@ const UserServices = {
             throw new Error((error as Error).message);
         }
     },
-    UpdateBMIs: async (body: BMIModel) => {
+    createBMIs: async (body: BMIModel) => {
         try {
             const { gender, height, weight, yearOfBirth } = body;
             const user = await Users.findOne({ _id: body.idUser });

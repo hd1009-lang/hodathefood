@@ -1,5 +1,6 @@
 const Auth = {
     type: 'object',
+    required: ['username', 'password'],
     properties: {
         username: {
             type: 'string',
@@ -19,6 +20,7 @@ const ApiResponse = {
 };
 const Register = {
     type: 'object',
+    required: ['username', 'password', 'name'],
     properties: {
         username: {
             type: 'string',
@@ -33,6 +35,7 @@ const Register = {
 };
 const BMI = {
     type: 'object',
+    required: ['idUser', 'height', 'weight', 'gender', 'yearOfBirth', 'activity'],
     properties: {
         idUser: {
             type: 'string',
@@ -54,19 +57,13 @@ const BMI = {
         },
     },
 };
-const Category = {
+const CategoryPost = {
     type: 'object',
+    required: ['name'],
     properties: {
-        id: {
-            type: 'integer',
-            format: 'int64',
-        },
         name: {
             type: 'string',
         },
-    },
-    xml: {
-        name: 'Category',
     },
 };
 const User = {
@@ -168,11 +165,8 @@ const Pet = {
 const DefaultModel = {
     Auth,
     Register,
-    // Category,
-    // User,
-    // Tag,
-    // Pet,
     BMI,
+    CategoryPost,
     ApiResponse,
 };
 export default DefaultModel;

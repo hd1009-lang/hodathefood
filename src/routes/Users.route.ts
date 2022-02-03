@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/login', asyncMiddle(UserController.login));
 router.post('/register', asyncMiddle(UserController.register));
-router.post('/update-bmi', asyncMiddle(UserController.updateBMI));
+router.post('/create-bmi', asyncMiddle(UserController.createBMI));
 
 export default router;

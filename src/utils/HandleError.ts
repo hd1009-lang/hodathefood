@@ -6,10 +6,6 @@ export enum HttpStatusCode {
     NOT_FOUND = 404,
     INTERNAL_SERVER = 500,
 }
-type ErrorDefault = {
-    mess: string;
-    code: number;
-};
 
 export class ErrorApi extends Error {
     public mess: string;
@@ -34,7 +30,7 @@ export const asyncMiddle = (fn: Function) => {
     };
 };
 
-export const handleErrorMessage = (err: ErrorApi, req: Request, res: Response, next: NextFunction) => {
+export const handleErrorMessage = (err: ErrorApi, req: Request, res: Response) => {
     console.log('check ne', err);
     if (err instanceof ErrorApi) {
         return res.status(err.code).json({ message: err.mess });

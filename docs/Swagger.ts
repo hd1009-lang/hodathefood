@@ -1,3 +1,4 @@
+import CatesSwagger from './Cates.swagger';
 import DefaultModel from './Model.swagger';
 import UserSwagger from './Users.swagger';
 const Swagger = {
@@ -12,10 +13,19 @@ const Swagger = {
             name: 'Auth',
             description: 'Auth web',
         },
+        {
+            name: 'User',
+            description: 'Info User (BMI, info)',
+        },
+        {
+            name: 'Category',
+            description: 'Category Post, Food, etc',
+        },
     ],
     schemes: ['http', 'https'],
     paths: {
         ...UserSwagger,
+        ...CatesSwagger,
     },
     definitions: {
         ...DefaultModel,
