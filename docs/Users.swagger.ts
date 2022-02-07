@@ -32,6 +32,28 @@ const UserSwagger = {
             },
         },
     },
+    '/api/users/refresh_token': {
+        post: {
+            tags: ['Auth'],
+            summary: 'Refresh_token',
+            description: '',
+            produces: ['application/json'],
+            responses: {
+                '200': {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+                '400': {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+            },
+        },
+    },
     '/api/users/register': {
         post: {
             tags: ['Auth'],
@@ -96,6 +118,60 @@ const UserSwagger = {
                     },
                 },
             },
+        },
+    },
+    '/api/users/bmi': {
+        get: {
+            tags: ['User'],
+            summary: 'GET BMI',
+            description: '',
+            produces: ['application/json'],
+            responses: {
+                '200': {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+                '400': {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+            },
+            security: [
+                {
+                    token: [],
+                },
+            ],
+        },
+    },
+    '/api/users/info': {
+        get: {
+            tags: ['User'],
+            summary: 'GET INFO',
+            description: '',
+            produces: ['application/json'],
+            responses: {
+                '200': {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+                '400': {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+            },
+            security: [
+                {
+                    token: [],
+                },
+            ],
         },
     },
 };

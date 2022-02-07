@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "Hoda food",
   "scripts": {
-    "dev": "nodemon --exec npx ts-node src/server.ts"
+    "dev": "nodemon --exec npx ts-node --files src/server.ts"
   },
   "author": "hoda",
   "license": "MIT",
   "dependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",

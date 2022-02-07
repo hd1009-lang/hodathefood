@@ -2,6 +2,7 @@ import { handleErrorMessage } from './utils/HandleError';
 import express from 'express';
 import connectDB from './config/db';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import routes from './routes';
@@ -15,11 +16,11 @@ connectDB();
 
 const app = express();
 const PORT = 8000;
+app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.get('/', (req, res) => {
     return res.redirect('/docs');
