@@ -35,11 +35,8 @@ const Register = {
 };
 const BMI = {
     type: 'object',
-    required: ['idUser', 'height', 'weight', 'gender', 'yearOfBirth', 'activity'],
+    required: ['height', 'weight', 'gender', 'yearOfBirth', 'activity'],
     properties: {
-        idUser: {
-            type: 'string',
-        },
         height: {
             type: 'number',
         },

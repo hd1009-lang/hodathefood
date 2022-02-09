@@ -11,9 +11,11 @@ const BMISchema = new mongoose.Schema(
         },
         height: {
             type: Number,
+            default: 1,
         },
         weight: {
             type: Number,
+            default: 1,
         },
         gender: {
             type: Number,
@@ -21,12 +23,15 @@ const BMISchema = new mongoose.Schema(
         },
         yearOfBirth: {
             type: Number,
+            default: 1,
         },
         activity: {
             type: Number,
+            default: 1,
         },
         bmi: {
             type: Number,
+            default: 1,
             required: true,
         },
     },

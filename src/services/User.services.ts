@@ -1,12 +1,15 @@
 import { ErrorApi } from './../utils/HandleError';
 import { BMIModel, User } from './../Types/User';
 import { UserRegister } from '../Types/User';
+import { HabitWaterRequest, HabitWater, Habit } from '../Types/HabitWater';
 import BMIs from '../models/BMI.model';
 import Users from '../models/User.model';
 import Token from '../utils/token';
 import jwt from 'jsonwebtoken';
+import HabitWaters from '../models/HabitWater.model';
 const UserServices = {
-    RegisterUser: async (body: UserRegister) => {
+    RegisterUser: async (body: UserRegister, id: string) => {
+        const currentYear = new Date().getFullYear();
         try {
             const user = await Users.findOne({ username: body.username });
             if (user) {
@@ -16,6 +19,8 @@ const UserServices = {
                 ...body,
             });
             const data = await newUser.save();
+            const initialData = [{ _id: id, date: id }];
+            await HabitWaters.create({ _id: data.username + id, idUser: data._id, data: initialData, year: currentYear });
             return data;
         } catch (error) {
             throw ErrorApi.BadRequest((error as Error).message);
@@ -62,14 +67,40 @@ const UserServices = {
             const { gender, height, weight, yearOfBirth } = body;
             const user = await Users.findOne({ _id: body.idUser });
             if (!user) throw new Error('Không tồn tại user');
-            const bmi = CalculateBmi(gender!, weight!, height!, yearOfBirth!);
+            // const bmi = CalculateBmi(gender!, weight!, height!, yearOfBirth!);
             const newBMI = new BMIs({
                 ...body,
-                bmi,
+                // bmi,
             });
             const resultBMI = await newBMI.save();
             await user.updateOne({ bmiId: resultBMI.id });
             return resultBMI;
+        } catch (error) {
+            throw ErrorApi.BadRequest((error as Error).message);
+        }
+    },
+    updateBMIs: async (body: BMIModel) => {
+        try {
+            const { gender, height, weight, yearOfBirth } = body;
+            const bmi = await BMIs.findOne({ idUser: body.idUser });
+            if (!bmi) throw new Error('Không tồn tại');
+            const newBMI = CalculateBmi(
+                gender || bmi.gender!,
+                weight || bmi.weight!,
+                height || bmi.height!,
+                yearOfBirth || bmi.yearOfBirth!
+            );
+
+            await bmi.updateOne({
+                idUser: body.idUser,
+                weight: body.weight || bmi.weight,
+                height: body.height || bmi.height,
+                gender: body.gender || bmi.gender,
+                yearOfBirth: body.yearOfBirth || bmi.yearOfBirth,
+                activity: body.activity || bmi.activity,
+                bmi: newBMI,
+            });
+            return bmi;
         } catch (error) {
             throw ErrorApi.BadRequest((error as Error).message);
         }
@@ -85,9 +116,51 @@ const UserServices = {
     },
     getInfoUser: async (idUser: string) => {
         try {
-            const user = await Users.findOne({ idUser: idUser }).populate('bmiId', '-_id -idUser');
+            const user = await Users.findOne({ _id: idUser }).populate('bmiId', '-_id -idUser');
             if (!user) throw new Error('Vui lòng kiểm tra lại');
             return user;
+        } catch (error) {
+            throw ErrorApi.BadRequest((error as Error).message);
+        }
+    },
+    addHabit: async (idUser: string, content: Habit, id: string) => {
+        try {
+            const { process, water } = content;
+            const currentYear = new Date().getFullYear();
+            const user = await Users.findById(idUser);
+            if (!user) throw new Error('User không tồn tại');
+            const habit = await HabitWaters.findOne({ idUser: idUser, year: currentYear });
+            if (habit) {
+                const currentDate = habit.data[habit.data.length - 1];
+                if (currentDate.date === id) {
+                    if (process) {
+                        habit.data[habit.data.length - 1].process = process!;
+                        habit.data[habit.data.length - 1].water! += water!;
+                    } else {
+                        habit.data[habit.data.length - 1].water! += water!;
+                    }
+                    const resultUpdate = await habit.save();
+                    return resultUpdate;
+                }
+                const initialData = { _id: id, date: id, water: water! };
+                habit.data.push(initialData);
+                const newHabit = await habit.save();
+                return newHabit;
+            } else {
+                const initialData = [{ _id: id, date: id, water: water! }];
+                const result = await HabitWaters.create({ _id: user.username + id, idUser: idUser, data: initialData, year: currentYear });
+                return result;
+            }
+        } catch (error) {
+            throw ErrorApi.BadRequest((error as Error).message);
+        }
+    },
+    getHabit: async (idUser: string) => {
+        try {
+            const currentYear = new Date().getFullYear();
+            const habit = await HabitWaters.findOne({ idUser: idUser, year: currentYear });
+            if (habit) return habit;
+            throw new Error('Không tìm thấy');
         } catch (error) {
             throw ErrorApi.BadRequest((error as Error).message);
         }

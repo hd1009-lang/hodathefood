@@ -118,6 +118,49 @@ const UserSwagger = {
                     },
                 },
             },
+            security: [
+                {
+                    token: [],
+                },
+            ],
+        },
+    },
+    '/api/users/update-bmi': {
+        post: {
+            tags: ['User'],
+            summary: 'Update BMI',
+            description: '',
+            produces: ['application/json'],
+            parameters: [
+                {
+                    in: 'body',
+                    name: 'body',
+                    description: 'Update BMI',
+                    required: true,
+                    schema: {
+                        $ref: '#/definitions/BMI',
+                    },
+                },
+            ],
+            responses: {
+                '200': {
+                    description: 'Success',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+                '400': {
+                    description: 'Error',
+                    schema: {
+                        $ref: '#/definitions/ApiResponse',
+                    },
+                },
+            },
+            security: [
+                {
+                    token: [],
+                },
+            ],
         },
     },
     '/api/users/bmi': {
