@@ -12,11 +12,15 @@ const getDate = () => {
     const currentDate = new Date();
     return currentDate.getDate().toString() + Monts[currentDate.getMonth()] + currentDate.getFullYear();
 };
+const getTime = () => {
+    return currentDate.getTime();
+};
 const theDate = {
     Weeks,
     Monts,
     datesInMonth,
     getDate,
+    getTime,
 };
 
 export default theDate;

@@ -1,5 +1,7 @@
 import CatesSwagger from './Cates.swagger';
+import IngredientSwagger from './Ingredient.swagger';
 import DefaultModel from './Model.swagger';
+import PostSwagger from './Post.swagger';
 import UserSwagger from './Users.swagger';
 const Swagger = {
     swagger: '2.0',
@@ -21,11 +23,17 @@ const Swagger = {
             name: 'Category',
             description: 'Category Post, Food, etc',
         },
+        {
+            name: 'Ingredients',
+            description: 'Ingredient of the food',
+        },
     ],
     schemes: ['http', 'https'],
     paths: {
         ...UserSwagger,
         ...CatesSwagger,
+        ...IngredientSwagger,
+        ...PostSwagger,
     },
     definitions: {
         ...DefaultModel,

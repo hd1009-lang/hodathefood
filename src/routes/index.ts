@@ -1,6 +1,8 @@
 import express from 'express';
 import UserRouter from './Users.route';
 import CateRouter from './Cates.route';
+import Ingredients from './Ingrdient.route';
+import Post from './Post.route';
 const router = express.Router();
 
 const pathRouter = [
@@ -11,6 +13,14 @@ const pathRouter = [
     {
         path: '/cates',
         route: CateRouter,
+    },
+    {
+        path: '/ingredients',
+        route: Ingredients,
+    },
+    {
+        path: '/posts',
+        route: Post,
     },
 ];
 

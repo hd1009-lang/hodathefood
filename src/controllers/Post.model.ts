@@ -2,11 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 
 const PostSchema = new Schema(
     {
-        _id: {
-            type: String,
-            required: true,
-            trim: true,
-        },
         title: {
             type: String,
             required: true,
@@ -14,10 +9,6 @@ const PostSchema = new Schema(
         idCate: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'cates',
-        },
-        idUser: {
-            type: String,
-            ref: 'users',
         },
         ingredient: [
             {
@@ -27,7 +18,6 @@ const PostSchema = new Schema(
         ],
         data: {
             type: Object,
-            default: {},
         },
     },
     {
