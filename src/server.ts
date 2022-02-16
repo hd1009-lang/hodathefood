@@ -2,8 +2,8 @@ import { handleErrorMessage } from './utils/HandleError';
 import express from 'express';
 import connectDB from './config/db';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import routes from './routes';
 import path from 'path';
@@ -15,12 +15,15 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const PORT = 8000;
-app.use(cookieParser());
-app.use(cors());
-app.use(helmet());
+
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+
+app.use(cors({ credentials: true, origin: allowedOrigins }));
 app.use(express.json());
+app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser());
+const PORT = 8000;
 
 app.get('/', (req, res) => {
     return res.redirect('/docs');
@@ -35,7 +38,7 @@ var cssOptions = {
 app.use('/api', routes);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, cssOptions));
 
-app.use(handleErrorMessage);
+// app.use(handleErrorMessage);
 
 app.listen(PORT, () => {
     console.log(`Let's the game begin 🚀`);

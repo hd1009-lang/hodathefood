@@ -36,7 +36,8 @@ const UserController = {
         const rf_token = await req.cookies.refresh_token;
         if (!rf_token) throw ErrorApi.UnAuthenticate('Vui lòng đăng nhập');
         const accessToken = UserServices.getAccessToken(rf_token);
-        return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', token: accessToken });
+
+        return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });
     },
     createBMI: async (req: Request, res: Response) => {
         const id = req.user;
