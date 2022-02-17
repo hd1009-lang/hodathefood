@@ -26,6 +26,8 @@ const UserController = {
         Validate.UserValidation.ValidateLogin(content);
         const result = await UserServices.LoginUser(content);
         res.cookie('refresh_token', result.refreshToken, {
+            sameSite: 'none',
+            secure: true,
             httpOnly: true,
             path: '/api/users/refresh_token',
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
@@ -35,10 +37,7 @@ const UserController = {
     getAccessToken: async (req: Request, res: Response) => {
         const rf_token = await req.cookies.refresh_token;
         if (!rf_token) throw ErrorApi.UnAuthenticate('Vui lòng đăng nhập');
-        console.log(rf_token);
-
         const accessToken = UserServices.getAccessToken(rf_token);
-
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });
     },
     createBMI: async (req: Request, res: Response) => {

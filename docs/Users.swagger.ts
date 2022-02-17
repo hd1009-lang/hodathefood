@@ -33,7 +33,7 @@ const UserSwagger = {
         },
     },
     '/api/users/refresh_token': {
-        post: {
+        get: {
             tags: ['Auth'],
             summary: 'Refresh_token',
             description: '',

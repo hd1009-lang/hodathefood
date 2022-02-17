@@ -35,7 +35,7 @@ export const asyncMiddle = (fn: Function) => {
 };
 
 export const handleErrorMessage = (err: ErrorApi, req: Request, res: Response, next: NextFunction) => {
-    console.log('check ne', err);
+    console.log( err);
     if (err instanceof ErrorApi) {
         return res.status(err.code).json({ message: err.mess });
     }
