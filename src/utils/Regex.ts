@@ -40,12 +40,22 @@ function removeVietnameseTones(str: string) {
     str = str.trim();
     // Remove punctuations
     // Bỏ dấu câu, kí tự đặc biệt
-    str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, ' ');
+    // str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, ' ');
     return str.toLowerCase();
 }
+
+const checkVietnamese = (text: string) => {
+    const regex: RegExp =
+        /à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ|è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ|ì|í|ị|ỉ|ĩ|ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ|ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ|ỳ|ý|ỵ|ỷ|ỹ|đ|\u0300|\u0301|\u0303|\u0309|\u0323|\u02C6|\u0306|\u031B/g;
+    if (regex.test(text.toLowerCase())) {
+        return false;
+    }
+    return true;
+};
 const Helper = {
     checkCountAtLeast,
     Regex,
     removeVietnameseTones,
+    checkVietnamese
 };
 export default Helper;

@@ -12,10 +12,11 @@ export const ValidateLogin: Function = (body: User) => {
 
 export const ValidateRegister: Function = (body: UserRegister) => {
     const { username, password, name } = body;
+    if (!username || !password || !name) throw ErrorApi.BadRequest('Nhập đầy đủ thông tin');
     if (username.length < 5) throw ErrorApi.BadRequest('Tài khoản phải hơn 5 kí tự');
     if (name.length < 0) throw ErrorApi.BadRequest('Tên phải từ 1 ký tự');
     if (password) {
-        if (password.length < 5) throw ErrorApi.BadRequest('Mật khẩu phải dài hơn 6 ký tự');
+        if (password.length < 8) throw ErrorApi.BadRequest('Mật khẩu phải dài hơn 6 ký tự');
         Helper.checkCountAtLeast(Helper.Regex.UPPERCASE, 2, password, 'Mật khẩu', 'ký tự viết hoa');
         Helper.checkCountAtLeast(Helper.Regex.NUMBER, 2, password, 'Mật khẩu', 'ký tự số');
         Helper.checkCountAtLeast(Helper.Regex.SPECIAL, 2, password, 'Mật khẩu', 'Ký tự đặc biệt');
@@ -27,7 +28,7 @@ export const ValidateRegister: Function = (body: UserRegister) => {
 
 export const ValidateBMI: Function = (body: BMIModel) => {
     const { gender, height, weight, activity, yearOfBirth } = body;
-    if (gender !== 0 && gender !== 1) throw ErrorApi.BadRequest('Giới tính Nam | Nữ');
+    if (gender !== 1 && gender !== 0) throw ErrorApi.BadRequest('Giới tính Nam | Nữ');
     if (height! <= 0 && weight! <= 0) throw ErrorApi.BadRequest('Chỉ số không thích hợp');
     if (activity! <= 0) throw ErrorApi.BadRequest('Chỉ số không thích hợp');
     const date = new Date();
@@ -37,15 +38,16 @@ export const ValidateBMI: Function = (body: BMIModel) => {
 export const ValidateUpdateUser: Function = (body: User) => {
     const { username, password, name } = body;
     if (username && username.length < 5) throw ErrorApi.BadRequest('Tài khoản phải hơn 5 kí tự');
-    if (password && password.length < 5) throw ErrorApi.BadRequest('Mật khẩu phải dài hơn 6 ký tự');
+    if (password && password.length < 8) throw ErrorApi.BadRequest('Mật khẩu phải dài hơn 6 ký tự');
     if (name && name.length < 0) throw ErrorApi.BadRequest('Tên phải từ 1 ký tự');
     if (password) {
-        if (password.length < 5) throw ErrorApi.BadRequest('Mật khẩu phải dài hơn 6 ký tự');
+        if (Helper.checkVietnamese(password)) throw ErrorApi.BadRequest('Vui lòng không gõ dấu');
+        if (password.length < 8) throw ErrorApi.BadRequest('Mật khẩu phải dài hơn 6 ký tự');
         Helper.checkCountAtLeast(Helper.Regex.UPPERCASE, 2, password, 'Mật khẩu', 'ký tự viết hoa');
         Helper.checkCountAtLeast(Helper.Regex.NUMBER, 2, password, 'Mật khẩu', 'ký tự số');
         Helper.checkCountAtLeast(Helper.Regex.SPECIAL, 2, password, 'Mật khẩu', 'Ký tự đặc biệt');
     }
-  
+
     return true;
 };
 const UserValidation = {

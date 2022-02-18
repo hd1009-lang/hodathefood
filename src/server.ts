@@ -38,7 +38,7 @@ var cssOptions = {
 app.use('/api', routes);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, cssOptions));
 
-// app.use(handleErrorMessage);
+app.use(handleErrorMessage);
 
 app.listen(PORT, () => {
     console.log(`Let's the game begin 🚀`);

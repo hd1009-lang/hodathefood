@@ -15,7 +15,7 @@ const UserController = {
         const idHabitToday = theDate.getDate();
         Validate.UserValidation.ValidateRegister(content);
         const data = await UserServices.RegisterUser(content, idHabitToday);
-        return res.status(HttpStatusCode.CREATED).json({ message: 'Ok', data });
+        return res.status(HttpStatusCode.CREATED).json({ message: 'Ok' });
     },
     login: async (req: Request, res: Response) => {
         const { username, password, ...another } = req.body;
