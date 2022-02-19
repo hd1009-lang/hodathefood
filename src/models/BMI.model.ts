@@ -1,10 +1,13 @@
 import mongoose from 'mongoose';
 import { BMIModel } from '../Types/User';
 
-export interface IBMIModel extends BMIModel, mongoose.Document {}
-
+type IBMIModel = BMIModel & mongoose.Document;
 const BMISchema = new mongoose.Schema(
     {
+        _id: {
+            type: String,
+            required: true,
+        },
         idUser: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'users',

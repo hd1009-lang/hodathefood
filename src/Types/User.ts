@@ -13,6 +13,7 @@ export interface UserRegister extends User {
 }
 
 export interface BMIModel {
+    _id: string;
     idUser: string;
     height?: number;
     weight?: number;
@@ -22,6 +23,6 @@ export interface BMIModel {
     bmi?: number;
 }
 
-export interface Role{
-    name:string,
+export interface Role {
+    name: string;
 }

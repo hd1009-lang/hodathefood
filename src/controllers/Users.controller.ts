@@ -43,7 +43,6 @@ const UserController = {
     createBMI: async (req: Request, res: Response) => {
         const id = req.user;
         const content = { ...req.body, idUser: id };
-        console.log(content);
 
         // Validate.UserValidation.ValidateBMI(content);
         const data = await UserServices.createBMIs(content);

@@ -7,6 +7,7 @@ import Users from '../models/User.model';
 import Token from '../utils/token';
 import jwt from 'jsonwebtoken';
 import HabitWaters from '../models/HabitWater.model';
+import theDate from '../utils/HandleDate';
 const UserServices = {
     RegisterUser: async (body: UserRegister, id: string) => {
         const currentYear = new Date().getFullYear();
@@ -15,12 +16,15 @@ const UserServices = {
             if (user) {
                 throw new Error('Tồn tại user');
             }
+            const idBmi = body.username + theDate.getTime();
             const newUser = new Users({
                 ...body,
+                bmiId: idBmi,
             });
             const data = await newUser.save();
             const initialData = [{ _id: id, date: id }];
-            await HabitWaters.create({ _id: data.username + id, idUser: data._id, data: initialData, year: currentYear });
+            // await HabitWaters.create({ _id: data.username + id, idUser: data._id, data: initialData, year: currentYear });
+            await BMIs.create({ _id: idBmi, idUser: data._id });
             return data;
         } catch (error) {
             throw ErrorApi.BadRequest((error as Error).message);

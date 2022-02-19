@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema(
             required: true,
         },
         bmiId: {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'bmis',
         },
         post: [
