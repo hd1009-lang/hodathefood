@@ -17,7 +17,7 @@ connectDB();
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001','https://hoda-client.vercel.app'];
 
 app.use(cors({ credentials: true, origin: allowedOrigins }));
 app.use(express.json());
