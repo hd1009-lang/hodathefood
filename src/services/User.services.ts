@@ -121,7 +121,7 @@ const UserServices = {
     getInfoUser: async (idUser: string) => {
         try {
             const user = await Users.findOne({ _id: idUser }).populate('bmiId', '-_id -idUser');
-            if (!user) throw new Error('Vui lòng kiểm tra lại');
+            if (!user) throw new Error(idUser);
             return user;
         } catch (error) {
             throw ErrorApi.BadRequest((error as Error).message);
