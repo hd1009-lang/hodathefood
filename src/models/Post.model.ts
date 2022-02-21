@@ -21,8 +21,14 @@ const PostSchema = new Schema(
         },
         ingredient: [
             {
-                type: String,
-                ref: 'ingredients',
+                name: {
+                    type: String,
+                    ref: 'ingredients',
+                },
+                quantity: {
+                    type: Number,
+                    default: 1,
+                },
             },
         ],
         data: {

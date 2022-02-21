@@ -3,6 +3,7 @@ import UserRouter from './Users.route';
 import CateRouter from './Cates.route';
 import Ingredients from './Ingrdient.route';
 import Post from './Post.route';
+import Service from './Service.route';
 const router = express.Router();
 
 const pathRouter = [
@@ -21,6 +22,10 @@ const pathRouter = [
     {
         path: '/posts',
         route: Post,
+    },
+    {
+        path: '/services',
+        route: Service,
     },
 ];
 

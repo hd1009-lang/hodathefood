@@ -11,14 +11,22 @@ const IngredientService = {
             throw ErrorApi.BadRequest((error as Error).message);
         }
     },
-    getCateIngredient:async()=>{
-      try {
-        const cates = await CateIngredients.find({})
-        return cates
-      } catch (error) {
-        throw ErrorApi.BadRequest((error as Error).message);
-      }
-    }
+    getCateIngredient: async () => {
+        try {
+            const cates = await CateIngredients.find({});
+            return cates;
+        } catch (error) {
+            throw ErrorApi.BadRequest((error as Error).message);
+        }
+    },
+    getIngredientWithCate: async (idCate: string) => {
+        try {
+            const ingredients = await Ingredients.find({ idCate: idCate });
+            return ingredients;
+        } catch (error) {
+            throw ErrorApi.BadRequest((error as Error).message);
+        }
+    },
 };
 
 export default IngredientService;

@@ -9,6 +9,7 @@ import routes from './routes';
 import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument from '../docs/Swagger';
+import fileUpload from 'express-fileupload';
 
 dotenv.config();
 
@@ -23,6 +24,12 @@ app.use(express.json());
 app.use(helmet());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
+app.use(
+    fileUpload({
+        useTempFiles: true,
+        tempFileDir: '/tmp',
+    })
+);
 const PORT = process.env.PORT || 8000;
 
 app.get('/', (req, res) => {
