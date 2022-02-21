@@ -75,7 +75,8 @@ const UserController = {
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', data: result });
     },
     logout: async (req: Request, res: Response) => {
-        res.clearCookie('refresh_token', { path: '/api/users/refresh_token', domain: '.hodathefood.vercel.app' });
+        res.clearCookie('refresh_token');
+
         return res.status(HttpStatusCode.OK).json({ message: 'Đã đăng xuất' });
     },
 };
