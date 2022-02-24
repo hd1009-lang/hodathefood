@@ -19,9 +19,9 @@ const PostSchema = new Schema(
             type: String,
             ref: 'users',
         },
-        ingredient: [
+        ingredients: [
             {
-                name: {
+                idIngredient: {
                     type: String,
                     ref: 'ingredients',
                 },
@@ -32,8 +32,8 @@ const PostSchema = new Schema(
             },
         ],
         data: {
-            type: Object,
-            default: {},
+            type: Array,
+            default: [],
         },
     },
     {
