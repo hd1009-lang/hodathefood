@@ -8,7 +8,7 @@ const RecipeController = {
             idUser: req.user,
         };
         const result = await RecipeService.createPost(content);
-        return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', data: result });
+        return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', data: result._id });
     },
     getPost: async (req: Request, res: Response) => {
         const id = req.params.id;

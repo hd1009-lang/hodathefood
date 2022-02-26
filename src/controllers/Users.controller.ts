@@ -47,8 +47,6 @@ const UserController = {
     },
     getAccessToken: async (req: Request, res: Response) => {
         const rf_token = await req.cookies.refresh_token;
-        console.log(rf_token);
-
         if (!rf_token && !req.headers.cookie) throw ErrorApi.UnAuthenticate('Vui lòng đăng nhập');
         const accessToken = UserServices.getAccessToken(rf_token || (req.headers.cookie as string));
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });

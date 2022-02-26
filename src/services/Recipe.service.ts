@@ -24,6 +24,8 @@ const PostService = {
         }
     },
     getPost: async (id: string) => {
+        const data: ResponseRecipeIngredient[] = [];
+
         try {
             const detailPost = await Recipe.findById(id)
                 .populate('idUser', '_id username')
@@ -31,8 +33,10 @@ const PostService = {
                     path: 'ingredients',
                     populate: { path: 'idIngredient', select: 'name nutrition', populate: { path: 'idCate', select: 'name ' } },
                 });
-
-            const handleIngredient = handleDataIngredientInfo([...detailPost?.ingredients!]);
+            detailPost?.ingredients?.forEach((item) => {
+                data.push(item);
+            });
+            const handleIngredient = handleDataIngredientInfo(data);
             const handleInfo: ResponseRecipeAfter = {
                 _id: detailPost?._id,
                 data: detailPost?.data,
@@ -44,6 +48,7 @@ const PostService = {
 
             return handleInfo;
         } catch (error) {
+            console.log((error as Error).message);
             throw ErrorApi.BadRequest((error as Error).message);
         }
     },
