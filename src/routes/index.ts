@@ -4,6 +4,7 @@ import CateRouter from './Cates.route';
 import Ingredients from './Ingrdient.route';
 import Post from './Post.route';
 import Service from './Service.route';
+import Recipe from './Recipe.route';
 const router = express.Router();
 
 const pathRouter = [
@@ -26,6 +27,10 @@ const pathRouter = [
     {
         path: '/services',
         route: Service,
+    },
+    {
+        path: '/recipes',
+        route: Recipe,
     },
 ];
 

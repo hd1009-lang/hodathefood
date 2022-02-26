@@ -1,6 +1,7 @@
+import { ResponseRecipeBefore } from './../Types/Recipe';
 import mongoose, { Schema } from 'mongoose';
-
-const PostSchema = new Schema(
+type IRecipeModel = ResponseRecipeBefore & mongoose.Document;
+const RecipeSchema = new Schema(
     {
         _id: {
             type: String,
@@ -37,7 +38,15 @@ const PostSchema = new Schema(
         ],
         data: {
             type: Array,
-            default: [],
+            default: [
+                {
+                    content: {
+                        type: String,
+                        required: true,
+                    },
+                    img: Array,
+                },
+            ],
         },
     },
     {
@@ -45,5 +54,5 @@ const PostSchema = new Schema(
     }
 );
 
-const Post = mongoose.model('posts', PostSchema);
-export default Post;
+const Recipes = mongoose.model<IRecipeModel>('recipes', RecipeSchema);
+export default Recipes;

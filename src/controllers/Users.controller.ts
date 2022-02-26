@@ -5,6 +5,7 @@ import UserServices from '../services/User.services';
 import Helper from '../utils/Regex';
 import TheDate from '../utils/HandleDate';
 import theDate from '../utils/HandleDate';
+import cookie from 'cookie';
 const UserController = {
     register: async (req: Request, res: Response) => {
         const { username, password } = req.body;
@@ -25,19 +26,31 @@ const UserController = {
         };
         Validate.UserValidation.ValidateLogin(content);
         const result = await UserServices.LoginUser(content);
-        res.cookie('refresh_token', result.refreshToken, {
-            sameSite: 'none',
-            secure: true,
-            httpOnly: true,
-            path: '/api/users/refresh_token',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
-        });
+        // res.cookie('refresh_token', result.refreshToken, {
+        //     sameSite: 'none',
+        //     secure: true,
+        //     httpOnly: true,
+        //     path: '/api/users/refresh_token',
+        //     maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+        // });
+        res.setHeader(
+            'Set-Cookie',
+            cookie.serialize('refresh_token', result.refreshToken, {
+                sameSite: 'none',
+                secure: true,
+                httpOnly: true,
+                path: '/',
+                maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+            })
+        );
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', data: result.user, token: result.refreshToken });
     },
     getAccessToken: async (req: Request, res: Response) => {
         const rf_token = await req.cookies.refresh_token;
-        if (!rf_token) throw ErrorApi.UnAuthenticate('Vui lòng đăng nhập');
-        const accessToken = UserServices.getAccessToken(rf_token);
+        console.log(rf_token);
+
+        if (!rf_token && !req.headers.cookie) throw ErrorApi.UnAuthenticate('Vui lòng đăng nhập');
+        const accessToken = UserServices.getAccessToken(rf_token || (req.headers.cookie as string));
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });
     },
     createBMI: async (req: Request, res: Response) => {
@@ -75,7 +88,8 @@ const UserController = {
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', data: result });
     },
     logout: async (req: Request, res: Response) => {
-        res.clearCookie('refresh_token');
+        // res.clearCookie('refresh_token', { path: '/api/users/refresh_token' });
+        res.clearCookie('refresh_token', { path: '/' });
 
         return res.status(HttpStatusCode.OK).json({ message: 'Đã đăng xuất' });
     },
