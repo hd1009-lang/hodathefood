@@ -43,6 +43,7 @@ const PostService = {
                 img: detailPost?.img,
                 title: detailPost?.title,
                 idUser: detailPost?.idUser,
+                totalRecipe: detailPost?.totalRecipe,
             };
 
             return handleInfo;

@@ -9,6 +9,12 @@ export interface RecipeModelInput {
         quantity: number;
     }[];
     data?: StepModel[];
+    totalRecipe?: {
+        calo: number;
+        protein: number;
+        carb: number;
+        fat: number;
+    };
 }
 export interface StepModel {
     content: string;
@@ -34,6 +40,12 @@ export interface ResponseRecipeBefore {
         quantity: number;
     }[];
     data?: StepModel[];
+    totalRecipe?: {
+        calo: number;
+        protein: number;
+        carb: number;
+        fat: number;
+    };
 }
 export interface ResponseRecipeIngredient {
     idIngredient: {
@@ -63,4 +75,10 @@ export interface ResponseRecipeAfter {
     img?: string;
     ingredients?: ResponseRecipeIngredientHandled[];
     data?: StepModel[];
+    totalRecipe?: {
+        calo: number;
+        protein: number;
+        carb: number;
+        fat: number;
+    };
 }

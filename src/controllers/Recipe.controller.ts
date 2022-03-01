@@ -3,6 +3,8 @@ import { Request, Response } from 'express';
 import RecipeService from '../services/Recipe.service';
 const RecipeController = {
     createPost: async (req: Request, res: Response) => {
+        console.log(req.body);
+
         const content = {
             ...req.body,
             idUser: req.user,
@@ -17,7 +19,6 @@ const RecipeController = {
     },
     getAllRecipe: async (req: Request, res: Response) => {
         const { page } = req.query;
-        console.log(page);
         const result = await RecipeService.getAllRecipe(Number(page) || 0);
 
         return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', data: result });
