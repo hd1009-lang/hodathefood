@@ -25,7 +25,6 @@ const PostService = {
     },
     getPost: async (id: string) => {
         const data: ResponseRecipeIngredient[] = [];
-
         try {
             const detailPost = await Recipe.findById(id)
                 .populate('idUser', '_id username')
@@ -47,6 +46,17 @@ const PostService = {
             };
 
             return handleInfo;
+        } catch (error) {
+            console.log((error as Error).message);
+            throw ErrorApi.BadRequest((error as Error).message);
+        }
+    },
+    getAllRecipe: async (page: number) => {
+        try {
+            const result = await Recipe.find({})
+                .limit(10)
+                .skip(10 * page);
+            return result;
         } catch (error) {
             console.log((error as Error).message);
             throw ErrorApi.BadRequest((error as Error).message);

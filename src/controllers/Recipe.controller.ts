@@ -15,6 +15,13 @@ const RecipeController = {
         const result = await RecipeService.getPost(id);
         return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', data: result });
     },
+    getAllRecipe: async (req: Request, res: Response) => {
+        const { page } = req.query;
+        console.log(page);
+        const result = await RecipeService.getAllRecipe(Number(page) || 0);
+
+        return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', data: result });
+    },
 };
 
 export default RecipeController;

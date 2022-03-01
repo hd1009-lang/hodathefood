@@ -7,4 +7,5 @@ const router = express.Router();
 
 router.post('/create', AuthenticateToken, asyncMiddle(RecipeController.createPost));
 router.get('/:id', asyncMiddle(RecipeController.getPost));
+router.get('/', asyncMiddle(RecipeController.getAllRecipe));
 export default router;

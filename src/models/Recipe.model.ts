@@ -36,6 +36,12 @@ const RecipeSchema = new Schema(
                 },
             },
         ],
+        totalRecipe: {
+            calo: { type: Number, required: true, default: 0 },
+            protein: { type: Number, required: true, default: 0 },
+            fat: { type: Number, required: true, default: 0 },
+            carb: { type: Number, required: true, default: 0 },
+        },
         data: {
             type: Array,
             default: [
