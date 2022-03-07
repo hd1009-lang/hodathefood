@@ -24,6 +24,8 @@ const PostService = {
         }
     },
     getPost: async (id: string) => {
+        console.log(id);
+        
         const data: ResponseRecipeIngredient[] = [];
         try {
             const detailPost = await Recipe.findById(id)
@@ -55,6 +57,7 @@ const PostService = {
     getAllRecipe: async (page: number) => {
         try {
             const result = await Recipe.find({})
+                .sort({ updatedAt: -1 })
                 .limit(10)
                 .skip(10 * page);
             return result;
@@ -62,6 +65,21 @@ const PostService = {
             console.log((error as Error).message);
             throw ErrorApi.BadRequest((error as Error).message);
         }
+    },
+    updateRecipe: async (data: RecipeModelInput) => {
+        const recipe = await Recipe.findById({ _id: data._id });
+        if (!recipe) {
+            throw ErrorApi.BadRequest('Không tồn tại');
+        }
+        await recipe.updateOne(data);
+        return recipe;
+    },
+    getRecipeOfUser: async (id: string, page: number) => {
+        const result = await Recipe.find({ idUser: id })
+            .sort({ updatedAt: -1 })
+            .limit(10)
+            .skip(10 * page);
+        return result;
     },
 };
 

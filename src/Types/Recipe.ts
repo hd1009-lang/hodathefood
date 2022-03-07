@@ -1,15 +1,15 @@
 export interface RecipeModelInput {
     _id?: string;
-    title?: string;
+    title: string;
     idCate?: string;
-    idUser?: string;
-    img?: string;
-    ingredients?: {
+    idUser: string;
+    img: string;
+    ingredients: {
         idIngredient: string;
         quantity: number;
     }[];
-    data?: StepModel[];
-    totalRecipe?: {
+    data: StepModel[];
+    totalRecipe: {
         calo: number;
         protein: number;
         carb: number;
