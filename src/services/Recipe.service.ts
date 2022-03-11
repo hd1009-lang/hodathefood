@@ -24,8 +24,7 @@ const PostService = {
         }
     },
     getPost: async (id: string) => {
-        console.log(id);
-        
+
         const data: ResponseRecipeIngredient[] = [];
         try {
             const detailPost = await Recipe.findById(id)
@@ -55,6 +54,7 @@ const PostService = {
         }
     },
     getAllRecipe: async (page: number) => {
+
         try {
             const result = await Recipe.find({})
                 .sort({ updatedAt: -1 })

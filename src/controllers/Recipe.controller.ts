@@ -21,7 +21,6 @@ const RecipeController = {
     getRecipeOfUser: async (req: Request, res: Response) => {
         const id = req.user;
         const { page } = req.query;
-        console.log(id, page);
         const result = await RecipeService.getRecipeOfUser(id as string, Number(page) || 0);
 
         return res.status(HttpStatusCode.CREATED).json({ message: 'Thành công', data: result });
