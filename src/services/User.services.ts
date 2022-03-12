@@ -33,6 +33,7 @@ const UserServices = {
     LoginUser: async (content: User) => {
         try {
             const user = await Users.findOne({ username: content.username }).populate('bmiId', '');
+           
             if (!user || user.password !== content.password) {
                 throw new Error('Vui lòng kiểm tra tài khoản hoặc mật khẩu');
             }

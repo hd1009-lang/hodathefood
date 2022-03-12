@@ -19,6 +19,7 @@ const UserController = {
         return res.status(HttpStatusCode.CREATED).json({ message: 'Ok' });
     },
     login: async (req: Request, res: Response) => {
+        
         const { username, password, ...another } = req.body;
         const content = {
             username,
